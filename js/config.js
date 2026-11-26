@@ -1,5 +1,5 @@
 // Direcciones de los microservicios (cada uno corre en su propio puerto)
-const CONFIG = {
+export const CONFIG = {
     SERVICIOS: {
         auth:        'http://localhost:8001/api/auth',
         conductores: 'http://localhost:8002/api/conductores',

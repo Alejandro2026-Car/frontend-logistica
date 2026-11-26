@@ -1,35 +1,14 @@
-// Utilidades de sesión y cliente HTTP para consumir los microservicios
-
-function obtenerToken() {
-    return localStorage.getItem(CONFIG.CLAVE_TOKEN);
-}
-
-function obtenerUsuario() {
-    try {
-        return JSON.parse(localStorage.getItem(CONFIG.CLAVE_USUARIO));
-    } catch (e) {
-        return null;
-    }
-}
-
-function guardarSesion(token, usuario) {
-    localStorage.setItem(CONFIG.CLAVE_TOKEN, token);
-    localStorage.setItem(CONFIG.CLAVE_USUARIO, JSON.stringify(usuario));
-}
-
-function limpiarSesion() {
-    localStorage.removeItem(CONFIG.CLAVE_TOKEN);
-    localStorage.removeItem(CONFIG.CLAVE_USUARIO);
-}
+// Cliente HTTP para los microservicios (usa fetch)
+import { CONFIG } from '../config.js';
+import { obtenerToken, limpiarSesion } from './AlmacenSesion.js';
 
 /**
- * Llama a un microservicio.
  * @param {string} servicio  clave de CONFIG.SERVICIOS (auth, conductores, ...)
- * @param {string} ruta      por ejemplo '/login'
- * @param {object} opciones  { metodo, cuerpo, conToken }
- * @returns {Promise<{ok:boolean,status:number,mensaje:string,data:any}>}
+ * @param {string} ruta      por ejemplo '/login' o '?estado=disponible'
+ * @param {{metodo?:string, cuerpo?:object|null, conToken?:boolean}} opciones
+ * @returns {Promise<{ok:boolean,status:number,mensaje:string,data:any,errores:object|null}>}
  */
-async function llamarApi(servicio, ruta, { metodo = 'GET', cuerpo = null, conToken = true } = {}) {
+export async function llamarApi(servicio, ruta, { metodo = 'GET', cuerpo = null, conToken = true } = {}) {
     const cabeceras = { 'Accept': 'application/json' };
     if (cuerpo) cabeceras['Content-Type'] = 'application/json';
 
@@ -50,18 +29,26 @@ async function llamarApi(servicio, ruta, { metodo = 'GET', cuerpo = null, conTok
         let json = null;
         try { json = await respuesta.json(); } catch (e) { /* respuesta sin JSON */ }
 
+        // Token vencido o inválido en una pantalla protegida: volver al login
+        if (respuesta.status === 401 && conToken) {
+            limpiarSesion();
+            window.location.replace('index.html');
+        }
+
         return {
             ok: respuesta.ok && !!(json && json.success),
             status: respuesta.status,
             mensaje: json && json.message ? json.message : 'Respuesta inesperada del servidor',
-            data: json ? json.data : null
+            data: json ? json.data : null,
+            errores: json && json.errors ? json.errors : null
         };
     } catch (error) {
         return {
             ok: false,
             status: 0,
             mensaje: 'No se pudo conectar con el servicio de ' + servicio,
-            data: null
+            data: null,
+            errores: null
         };
     } finally {
         clearTimeout(temporizador);

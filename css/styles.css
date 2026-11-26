@@ -158,3 +158,92 @@ body.cargando .contenido { visibility: hidden; }
 @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
 }
+
+/* ---------- Módulos: encabezado, filtros, tabla ---------- */
+.contenido--ancho { max-width: 76rem; }
+
+.encabezado-modulo {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+.encabezado-modulo .contenido__intro { margin-bottom: 0; }
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    border-radius: 4px;
+}
+.filtros label, .rejilla label { display: block; margin-bottom: .25rem; font-weight: 600; font-size: .9rem; }
+.filtros input, .filtros select,
+.rejilla input, .rejilla select {
+    font: inherit;
+    width: 100%;
+    padding: .55rem .65rem;
+    background: var(--blanco);
+    border: 1px solid #aeb8b5;
+    border-radius: 4px;
+}
+.filtros__botones { display: flex; gap: .5rem; }
+
+.tabla-contenedor { overflow-x: auto; background: var(--blanco); border: 1px solid var(--linea); border-radius: 4px; }
+.tabla { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.tabla th {
+    text-align: left;
+    padding: .7rem .8rem;
+    font-size: .8rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+    border-bottom: 2px solid var(--linea);
+}
+.tabla td { padding: .7rem .8rem; border-bottom: 1px solid var(--linea); vertical-align: middle; }
+.tabla tbody tr:last-child td { border-bottom: 0; }
+.tabla .acciones { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.tabla select { font: inherit; font-size: .85rem; padding: .3rem .4rem; border: 1px solid #aeb8b5; border-radius: 4px; background: var(--blanco); }
+.sin-resultados { margin: 0; padding: 2rem 1rem; text-align: center; color: var(--texto-suave); }
+
+.boton--chico { padding: .3rem .65rem; font-size: .85rem; }
+.boton--peligro { color: var(--rojo); background: transparent; border: 1px solid var(--rojo); }
+.boton--peligro:hover { color: var(--blanco); background: var(--rojo); }
+
+/* ---------- Badges de estado (se reutilizan en todos los módulos) ---------- */
+.badge {
+    display: inline-block;
+    padding: .15rem .6rem;
+    font-size: .8rem;
+    font-weight: 600;
+    border-radius: 999px;
+    background: #e4e8e7;
+    color: var(--texto);
+}
+.badge--disponible, .badge--finalizado { background: #dff1e8; color: #135236; }
+.badge--en_ruta, .badge--en_transito   { background: #dce9f5; color: #0f4c80; }
+.badge--programado                      { background: #e8e4f3; color: #46327d; }
+.badge--retrasado, .badge--mantenimiento { background: #f8ebcf; color: #7a5200; }
+.badge--inactivo, .badge--cancelado     { background: #e4e8e7; color: #4a5560; }
+
+.etiqueta-alerta { padding: .1rem .45rem; font-size: .75rem; font-weight: 600; color: #7d1f17; background: #f8e3e0; border-radius: 4px; }
+
+/* ---------- Diálogo / formulario modal ---------- */
+.dialogo { width: min(100% - 2rem, 40rem); padding: 0; border: 0; border-radius: 6px; box-shadow: 0 10px 40px rgba(0, 0, 0, .3); }
+.dialogo::backdrop { background: rgba(38, 50, 60, .55); }
+.formulario--dialogo { width: 100%; padding: 1.5rem; }
+.formulario--dialogo h2 { margin-bottom: 1rem; }
+.rejilla { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem 1rem; }
+.rejilla__ancho { grid-column: 1 / -1; }
+.campo-error { display: block; min-height: 1.1rem; margin-top: .15rem; font-size: .8rem; color: var(--rojo); }
+.dialogo__botones { display: flex; justify-content: flex-end; gap: .6rem; margin-top: 1rem; }
+
+@media (max-width: 560px) {
+    .rejilla { grid-template-columns: 1fr; }
+}

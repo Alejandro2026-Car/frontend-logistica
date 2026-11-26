@@ -10,35 +10,14 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="pagina-panel cargando">
-    <header class="barra">
-        <span class="barra__marca">LogiTrans Express</span>
-        <nav class="barra__nav" aria-label="Módulos">
-            <a href="dashboard.html" aria-current="page">Panel</a>
-            <a href="#" aria-disabled="true">Conductores</a>
-            <a href="#" aria-disabled="true">Vehículos</a>
-            <a href="#" aria-disabled="true">Rutas</a>
-            <a href="#" aria-disabled="true">Viajes</a>
-        </nav>
-        <div class="barra__usuario">
-            <span><strong id="nombre-usuario"></strong> <small id="rol-usuario"></small></span>
-            <button type="button" id="btn-salir" class="boton boton--secundario">Cerrar sesión</button>
-        </div>
-    </header>
+    <div id="barra"></div>
 
     <main class="contenido">
         <h1 id="saludo">Hola</h1>
         <p class="contenido__intro">Estado de los servicios que alimentan el sistema.</p>
-
-        <ul id="lista-servicios" class="servicios" aria-live="polite">
-            <li class="servicio servicio--revisando">
-                <span class="servicio__punto" aria-hidden="true"></span>
-                <span class="servicio__texto"><strong>Comprobando servicios…</strong></span>
-            </li>
-        </ul>
+        <ul id="lista-servicios" class="servicios" aria-live="polite"></ul>
     </main>
 
-    <script src="js/config.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/dashboard.js"></script>
+    <script type="module" src="js/controllers/DashboardController.js"></script>
 </body>
 </html>
