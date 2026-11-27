@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vehículos · LogiTrans Express</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="pagina-panel cargando">
+    <div id="barra"></div>
+
+    <main class="contenido contenido--ancho">
+        <div class="encabezado-modulo">
+            <div>
+                <h1>Vehículos</h1>
+                <p class="contenido__intro">Registro, búsqueda y estado de la flota.</p>
+            </div>
+            <button type="button" id="btn-nuevo" class="boton">Nuevo vehículo</button>
+        </div>
+
+        <datalist id="tipos-vehiculo">
+            <option value="Camion"></option>
+            <option value="Furgon"></option>
+            <option value="Camioneta"></option>
+            <option value="Tractomula"></option>
+        </datalist>
+
+        <form id="form-filtros" class="filtros">
+            <div>
+                <label for="f-placa">Placa</label>
+                <input type="text" id="f-placa" class="mayusculas">
+            </div>
+            <div>
+                <label for="f-tipo">Tipo</label>
+                <input type="text" id="f-tipo" list="tipos-vehiculo">
+            </div>
+            <div>
+                <label for="f-estado">Estado</label>
+                <select id="f-estado">
+                    <option value="">Todos</option>
+                    <option value="disponible">Disponible</option>
+                    <option value="en_ruta">En ruta</option>
+                    <option value="mantenimiento">Mantenimiento</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+            </div>
+            <div class="filtros__botones">
+                <button type="submit" class="boton">Buscar</button>
+                <button type="button" id="btn-limpiar" class="boton boton--secundario">Limpiar</button>
+            </div>
+        </form>
+
+        <div id="aviso" class="aviso" role="alert" aria-live="polite" hidden></div>
+
+        <div class="tabla-contenedor">
+            <table id="tabla-vehiculos" class="tabla">
+                <thead>
+                    <tr>
+                        <th>Placa</th>
+                        <th>Tipo</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Capacidad de carga</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-tabla"></tbody>
+            </table>
+            <p id="sin-resultados" class="sin-resultados" hidden>No hay vehículos que coincidan con la búsqueda.</p>
+        </div>
+    </main>
+
+    <dialog id="dialogo-vehiculo" class="dialogo">
+        <form id="form-vehiculo" class="formulario formulario--dialogo" novalidate>
+            <h2 id="titulo-dialogo">Nuevo vehículo</h2>
+            <input type="hidden" id="vehiculo-id">
+
+            <div class="rejilla">
+                <div>
+                    <label for="placa">Placa</label>
+                    <input type="text" id="placa" class="mayusculas" maxlength="10" placeholder="ABC123">
+                    <span class="campo-error" id="error-placa"></span>
+                </div>
+                <div>
+                    <label for="tipo_vehiculo">Tipo de vehículo</label>
+                    <input type="text" id="tipo_vehiculo" list="tipos-vehiculo" maxlength="100">
+                    <span class="campo-error" id="error-tipo_vehiculo"></span>
+                </div>
+                <div>
+                    <label for="marca">Marca</label>
+                    <input type="text" id="marca" maxlength="100">
+                    <span class="campo-error" id="error-marca"></span>
+                </div>
+                <div>
+                    <label for="modelo">Modelo</label>
+                    <input type="text" id="modelo" maxlength="100" placeholder="2023">
+                    <span class="campo-error" id="error-modelo"></span>
+                </div>
+                <div>
+                    <label for="capacidad_carga">Capacidad de carga</label>
+                    <input type="number" id="capacidad_carga" min="0" step="any">
+                    <span class="campo-error" id="error-capacidad_carga"></span>
+                </div>
+                <div>
+                    <label for="estado">Estado</label>
+                    <select id="estado">
+                        <option value="disponible">Disponible</option>
+                        <option value="en_ruta">En ruta</option>
+                        <option value="mantenimiento">Mantenimiento</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                    <span class="campo-error" id="error-estado"></span>
+                </div>
+            </div>
+
+            <div class="dialogo__botones">
+                <button type="button" id="btn-cancelar" class="boton boton--secundario">Cancelar</button>
+                <button type="submit" id="btn-guardar" class="boton">Guardar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script type="module" src="js/controllers/VehiculosController.js"></script>
+</body>
+</html>

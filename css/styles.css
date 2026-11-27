@@ -247,3 +247,7 @@ body.cargando .contenido { visibility: hidden; }
 @media (max-width: 560px) {
     .rejilla { grid-template-columns: 1fr; }
 }
+
+/* ---------- Vehículos ---------- */
+.mayusculas { text-transform: uppercase; }
+.tabla td.placa { font-family: var(--fuente-titulos); font-size: 1.15rem; font-weight: 700; letter-spacing: .06em; }
