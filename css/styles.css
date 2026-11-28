@@ -251,3 +251,16 @@ body.cargando .contenido { visibility: hidden; }
 /* ---------- Vehículos ---------- */
 .mayusculas { text-transform: uppercase; }
 .tabla td.placa { font-family: var(--fuente-titulos); font-size: 1.15rem; font-weight: 700; letter-spacing: .06em; }
+
+/* ---------- Rutas ---------- */
+.rejilla textarea {
+    font: inherit;
+    width: 100%;
+    padding: .55rem .65rem;
+    resize: vertical;
+    background: var(--blanco);
+    border: 1px solid #aeb8b5;
+    border-radius: 4px;
+}
+.tabla td.ruta-nombre { font-weight: 600; white-space: nowrap; }
+.tabla td.observaciones { max-width: 22rem; color: var(--texto-suave); }

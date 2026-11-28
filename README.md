@@ -19,11 +19,11 @@ js/
 ├── config.js           URLs de los servicios
 ├── services/           Acceso a fetch y al localStorage (ApiService, AlmacenSesion)
 ├── models/             MODELO: datos, validaciones y llamadas a la API
-│   ├── SesionModel.js · ServicioModel.js · ConductorModel.js · VehiculoModel.js
+│   ├── SesionModel.js · ServicioModel.js · ConductorModel.js · VehiculoModel.js · RutaModel.js
 ├── views/              VISTA: pintar y leer el DOM (nada de fetch aquí)
-│   ├── BarraView.js · LoginView.js · DashboardView.js · ConductoresView.js · VehiculosView.js
+│   ├── BarraView.js · LoginView.js · DashboardView.js · ConductoresView.js · VehiculosView.js · RutasView.js
 └── controllers/        CONTROLADOR: conecta eventos → modelo → vista
-    ├── LoginController.js · DashboardController.js · ConductoresController.js · VehiculosController.js · SesionGuard.js
+    ├── LoginController.js · DashboardController.js · ConductoresController.js · VehiculosController.js · RutasController.js · SesionGuard.js
 ```
 
 Flujo: el usuario actúa en la **vista** → el **controlador** captura el evento → pide datos al **modelo** →
@@ -35,4 +35,5 @@ el modelo consulta al microservicio → el controlador entrega el resultado a la
 - [x] Panel con el estado de los 5 microservicios
 - [x] Conductores: listar, buscar, crear, editar, cambiar estado y eliminar
 - [x] Vehículos: listar, buscar, crear, editar, cambiar estado y eliminar
-- [ ] Rutas · Programación · Viajes
+- [x] Rutas: listar, buscar por ciudad, crear, editar y eliminar
+- [ ] Programación de viajes · Seguimiento de viajes

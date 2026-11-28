@@ -3,7 +3,7 @@ const SECCIONES = [
     { clave: 'panel',       texto: 'Panel',       href: 'dashboard.html' },
     { clave: 'conductores', texto: 'Conductores', href: 'conductores.html' },
     { clave: 'vehiculos',   texto: 'Vehículos',   href: 'vehiculos.html' },
-    { clave: 'rutas',       texto: 'Rutas',       href: null },
+    { clave: 'rutas',       texto: 'Rutas',       href: 'rutas.html' },
     { clave: 'viajes',      texto: 'Viajes',      href: null }
 ];
 

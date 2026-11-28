@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rutas · LogiTrans Express</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="pagina-panel cargando">
+    <div id="barra"></div>
+
+    <main class="contenido contenido--ancho">
+        <div class="encabezado-modulo">
+            <div>
+                <h1>Rutas</h1>
+                <p class="contenido__intro">Trayectos entre ciudades, con su distancia y tiempo estimado.</p>
+            </div>
+            <button type="button" id="btn-nuevo" class="boton">Nueva ruta</button>
+        </div>
+
+        <form id="form-filtros" class="filtros">
+            <div>
+                <label for="f-ciudad">Ciudad (origen o destino)</label>
+                <input type="text" id="f-ciudad">
+            </div>
+            <div>
+                <label for="f-origen">Origen</label>
+                <input type="text" id="f-origen">
+            </div>
+            <div>
+                <label for="f-destino">Destino</label>
+                <input type="text" id="f-destino">
+            </div>
+            <div class="filtros__botones">
+                <button type="submit" class="boton">Buscar</button>
+                <button type="button" id="btn-limpiar" class="boton boton--secundario">Limpiar</button>
+            </div>
+        </form>
+
+        <div id="aviso" class="aviso" role="alert" aria-live="polite" hidden></div>
+
+        <div class="tabla-contenedor">
+            <table id="tabla-rutas" class="tabla">
+                <thead>
+                    <tr>
+                        <th>Ruta</th>
+                        <th>Distancia</th>
+                        <th>Tiempo estimado</th>
+                        <th>Observaciones</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-tabla"></tbody>
+            </table>
+            <p id="sin-resultados" class="sin-resultados" hidden>No hay rutas que coincidan con la búsqueda.</p>
+        </div>
+    </main>
+
+    <dialog id="dialogo-ruta" class="dialogo">
+        <form id="form-ruta" class="formulario formulario--dialogo" novalidate>
+            <h2 id="titulo-dialogo">Nueva ruta</h2>
+            <input type="hidden" id="ruta-id">
+
+            <div class="rejilla">
+                <div>
+                    <label for="ciudad_origen">Ciudad de origen</label>
+                    <input type="text" id="ciudad_origen" maxlength="100">
+                    <span class="campo-error" id="error-ciudad_origen"></span>
+                </div>
+                <div>
+                    <label for="ciudad_destino">Ciudad de destino</label>
+                    <input type="text" id="ciudad_destino" maxlength="100">
+                    <span class="campo-error" id="error-ciudad_destino"></span>
+                </div>
+                <div>
+                    <label for="distancia">Distancia (km)</label>
+                    <input type="number" id="distancia" min="0" step="any">
+                    <span class="campo-error" id="error-distancia"></span>
+                </div>
+                <div>
+                    <label for="tiempo_estimado">Tiempo estimado</label>
+                    <input type="text" id="tiempo_estimado" maxlength="50" placeholder="8 horas">
+                    <span class="campo-error" id="error-tiempo_estimado"></span>
+                </div>
+                <div class="rejilla__ancho">
+                    <label for="observaciones">Observaciones (opcional)</label>
+                    <textarea id="observaciones" rows="3" maxlength="500"></textarea>
+                    <span class="campo-error" id="error-observaciones"></span>
+                </div>
+            </div>
+
+            <div class="dialogo__botones">
+                <button type="button" id="btn-cancelar" class="boton boton--secundario">Cancelar</button>
+                <button type="submit" id="btn-guardar" class="boton">Guardar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script type="module" src="js/controllers/RutasController.js"></script>
+</body>
+</html>
